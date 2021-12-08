@@ -24,6 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/pegawai/add").hasAuthority("ADMIN")
+                .antMatchers("/pegawai/view-all").hasAnyAuthority("ADMIN", "FACTORY_MANAGER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -57,8 +58,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .withUser("useradmin").password(encoder().encode("Admin!123")).roles("Admin");
 //    }
 
-
-
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -67,6 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
     }
+
 
 //    @Autowired
 //    private UserDetailsService userDetailsService;

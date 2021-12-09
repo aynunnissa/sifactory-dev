@@ -2,6 +2,7 @@ package apap.TugasAkhir.siFactory.restcontroller;
 
 import apap.TugasAkhir.siFactory.model.RequestUpdateItemModel;
 import apap.TugasAkhir.siFactory.rest.BaseResponse;
+import apap.TugasAkhir.siFactory.rest.RequestDTO;
 import apap.TugasAkhir.siFactory.service.RequestUpdateItemRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,23 +20,22 @@ public class RequestUpdateItemRestController {
     @Autowired
     private RequestUpdateItemRestService requestUpdateItemRestService;
 
-    @PostMapping(value="/requestUpdateItem/create")
+    @PostMapping(value = "/requestUpdateItem/create")
     private BaseResponse<RequestUpdateItemModel> createRequestUpdateItem(
-            @Valid @RequestBody RequestUpdateItemModel requestUpdateItem,
+            @Valid @RequestBody RequestDTO requestUpdateItem,
             BindingResult bindingResult) throws ParseException {
         BaseResponse<RequestUpdateItemModel> response = new BaseResponse<>();
-        if(bindingResult.hasFieldErrors()) {
+        if (bindingResult.hasFieldErrors()) {
             throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field"
-            );
+                    HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         } else {
             try {
-                RequestUpdateItemModel request =
-                        requestUpdateItemRestService.createRequestUpdateItem(requestUpdateItem);
+                RequestUpdateItemModel request = requestUpdateItemRestService
+                        .createRequestUpdateItem(requestUpdateItem);
                 response.setStatus(201);
                 response.setMessage("Request berhasil");
                 response.setResult(request);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 response.setStatus(400);
                 response.setMessage(e.toString());
                 response.setResult(null);

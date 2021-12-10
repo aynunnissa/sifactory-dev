@@ -13,20 +13,14 @@
     <div class="container">
       <div class="card m-4 p-4">
         <div class="card-body">
-          <div class="justify-content-center">
-            <h2>Tambah Pegawai</h2>
-            <br />
-            <form
-              th:action="@{/pegawai/add}"
-              th:object="${pegawai}"
-              method="POST"
-              onSubmit="return confirm('Apakah Anda yakin untuk menambahkan pegawai?')"
-            >
-              <p th:text="${message}" class="alert alert-info" role="alert"></p>
-              <label>Username</label>
-              <!--                    <p th:text="*{username}"></p>-->
-              <input type="text" name="username" class="form-control" />
-
+            <div class="justify-content-center">
+                <h2>Tambah Pegawai</h2>
+                <br>
+                <form th:action="@{/pegawai/add}" th:object="${pegawai}" method="POST" onSubmit="return confirm('Apakah Anda yakin untuk menambahkan pegawai?')">
+                    <p th:text="${message}" class="alert alert-info" role="alert"></p>
+                    <label>Username</label>
+<!--                    <p th:text="*{username}"></p>-->
+                    <input type="text" name="username" class="form-control" />
               <label>Nama</label>
               <input type="text" name="nama" class="form-control" />
 
